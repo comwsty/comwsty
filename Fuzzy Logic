@@ -1,0 +1,31 @@
+import numpy as np
+import skfuzzy as fuzz
+import matplotlib.pyplot as plt
+
+# Fuzzy logic: Defining the fuzzy variables
+x = np.arange(0, 11, 1)  # Range for input
+temp = fuzz.trimf(x, [0, 5, 10])  # Membership function for temperature (low to high)
+
+# Fuzzy logic: Defining a rule
+def temperature_to_fan_speed(temp_value):
+    # Low: 0-4, Medium: 5-7, High: 8-10
+    if temp_value <= 4:
+        return "Low Speed"
+    elif temp_value <= 7:
+        return "Medium Speed"
+    else:
+        return "High Speed"
+
+# Example fuzzy logic decision
+temp_value = 6  # Example input (temperature)
+fan_speed = temperature_to_fan_speed(temp_value)
+
+print(f"At temperature {temp_value}°C, the fan speed should be: {fan_speed}")
+
+# Plotting the fuzzy membership function
+plt.plot(x, temp, label='Temperature Membership')
+plt.title('Fuzzy Logic Temperature to Fan Speed')
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Membership')
+plt.legend()
+plt.show()
